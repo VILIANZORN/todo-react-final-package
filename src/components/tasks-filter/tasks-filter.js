@@ -48,4 +48,3 @@ TasksFilter.propsTypes = {
 };
 
 export default TasksFilter;
-hello = 'TasksFilter';
