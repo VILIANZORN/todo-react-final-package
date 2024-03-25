@@ -1,0 +1,4 @@
+.todo-list div.completed label .description {
+	color: #cdcdcd;
+	text-decoration: line-through;
+}
