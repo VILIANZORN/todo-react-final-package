@@ -1,32 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+import TasksFilter from '../tasks-filter/tasks-filter';
 import './footer.css';
-import TasksFilter from '../tasks-filter';
 
-function Footer({ todoCount, onClearComp, onFilterChange, filter }) {
+function Footer({ tasksCompleted, clearList, filter, onFilterSelect }) {
   return (
     <footer className="footer">
-      <span className="todo-count">{todoCount} items left</span>
-      <TasksFilter filter={filter} onFilterChange={onFilterChange} />
-      <button type="button" className="clear-completed" onClick={onClearComp}>
+      <span className="todo-count">{tasksCompleted} items left</span>
+      <ul className="filters">
+        <TasksFilter filter={filter} onFilterSelect={onFilterSelect} />
+      </ul>
+      <button type="button" className="clear-completed" onClick={clearList}>
         Clear completed
       </button>
     </footer>
   );
 }
-
-Footer.defaultProps = {
-  todoCount: 0,
-  onClearComp: () => {},
-  onFilterChange: () => {},
-  filter: 'all',
-};
-Footer.propTypes = {
-  todoCount: PropTypes.number,
-  onClearComp: PropTypes.func,
-  onFilterChange: PropTypes.func,
-  filter: PropTypes.string,
-};
 
 export default Footer;

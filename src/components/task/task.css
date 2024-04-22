@@ -1,4 +1,53 @@
-.todo-list div.completed label .description {
-	color: #cdcdcd;
-	text-decoration: line-through;
+.clear-completed,
+html .clear-completed:active {
+  position: relative;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clear-completed:hover {
+  text-decoration: underline;
+}
+
+.todo-list li .icon:hover {
+  color: #af5b5e;
+}
+
+.btns {
+  position: relative;
+  display: inline-flex;
+  top: 10px;
+  left: 10px;
+  right: 50px;
+}
+
+.todo-list li .icon-pause {
+  position: relative;
+  left: 25px;
+}
+.todo-list li .icon-play {
+  position: relative;
+}
+
+.icon-pause:after {
+  content: '⏸';
+  position: relative;
+  bottom: 0px;
+  left: 15px;
+
+}
+
+.icon-play:after {
+  content: '▶️';
+  position: relative;
+  bottom: 0px;
+}
+
+.result-timer {
+  color: gray;
+  font-size: 14px;
+  position: relative;
+  bottom: 14px;
+  left: 90px;
 }

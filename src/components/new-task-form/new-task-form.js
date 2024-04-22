@@ -1,42 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+
 import './new-task-form.css';
 
-export default class NewTaskForm extends Component {
-  state = {
-    label: '',
+function NewTaskForm({ onAdd }) {
+  const [title, setTitle] = useState('');
+  const [min, setMin] = useState('');
+  const [sec, setSec] = useState('');
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'title') {
+      setTitle(value);
+    } else if (name === 'min' && !Number.isNaN(value) && Number.isInteger(Number(value))) {
+      setMin(value);
+    } else if (name === 'sec' && !Number.isNaN(value) && Number.isInteger(Number(value))) {
+      setSec(value);
+    }
   };
 
-  onLabelChange = (event) => {
-    this.setState({ label: event.target.value });
-  };
-
-  onSubmit = (event) => {
-    const { label } = this.state;
-    const { onItemAdded } = this.props;
-
-    event.preventDefault();
-    if (label === '') {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (title.trim() === '') {
       return;
     }
-    onItemAdded(label);
-    this.setState({ label: '' });
+    onAdd(title, min, sec);
+    setTitle('');
+    setMin('');
+    setSec('');
   };
 
-  render() {
-    const { label } = this.state;
-    return (
-      <header className="header">
-        <h1>Todos</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            className="new-todo"
-            placeholder="What needs to be done?"
-            autoFocus
-            onChange={this.onLabelChange}
-            value={label}
-          />
-        </form>
-      </header>
-    );
-  }
+  return (
+    <form className="header" onSubmit={onSubmit}>
+      <h1>Todos</h1>
+      <input
+        className="new-todo"
+        placeholder="Task"
+        value={title}
+        name="title"
+        onChange={onInputChange}
+        style={{ width: '50%' }}
+      />
+      <input
+        className="new-todo"
+        value={min}
+        name="min"
+        onChange={onInputChange}
+        placeholder="Min"
+        style={{ width: '25%' }}
+      />
+      <input
+        className="new-todo"
+        value={sec}
+        name="sec"
+        onChange={onInputChange}
+        placeholder="Sec"
+        style={{ width: '25%' }}
+      />
+      <button type="submit" style={{ display: 'none' }}>
+        submit from Enter-button dont work without me
+      </button>
+    </form>
+  );
 }
+
+export default NewTaskForm;

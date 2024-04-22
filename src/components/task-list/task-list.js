@@ -1,34 +1,41 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 
 import Task from '../task/task';
-
 import './task-list.css';
 
-function TaskList({ todos, onDeleted, onToggleDone }) {
-  const elements = todos.map((item) => {
-    const { id, label, ...itemProps } = item;
-    return (
-      <li key={id}>
+function TaskList({
+  data,
+  onDelete,
+  onCompleted,
+  startTimer,
+  stopTimer,
+  onEditTitle,
+  editingTaskId,
+  setEditingTaskId,
+}) {
+  return (
+    <ul className="todo-list">
+      {data.map((elem) => (
         <Task
-          label={label}
-          {...itemProps} // Проверить
-          onDeleted={() => onDeleted(id)}
-          onToggleDone={() => {
-            onToggleDone(id);
-          }}
+          id={elem.id}
+          key={elem.id}
+          title={elem.title}
+          completed={elem.completed}
+          timeCreated={elem.timeCreated}
+          remainingTime={elem.minNSec}
+          onDelete={() => onDelete(elem.id)}
+          onCompleted={() => onCompleted(elem.id)}
+          startTimer={startTimer}
+          stopTimer={stopTimer}
+          onEditTitle={onEditTitle}
+          editingTaskId={editingTaskId === elem.id}
+          setEditingTaskId={(isEditing) => setEditingTaskId(isEditing ? elem.id : null)}
         />
-      </li>
-    );
-  });
-  return <ul className="todo-list">{elements}</ul>;
+      ))}
+    </ul>
+  );
 }
-TaskList.defaultProps = {
-  onDeleted: () => {},
-  onToggleDone: () => {},
-};
-TaskList.propTypes = {
-  onDeleted: PropTypes.func,
-  onToggleDone: PropTypes.func,
-};
+
 export default TaskList;
+

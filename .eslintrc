@@ -36,7 +36,8 @@
       "jsx-a11y/no-autofocus": 0,
       "react/prop-types": 0,
       "class-methods-use-this": 0,
-      "react/jsx-props-no-spreading": 0
+      "react/jsx-props-no-spreading": 0,
+      "jsx-a11y/label-has-associated-control": "off"
     },
     "settings": {
       "import/resolver": {
